@@ -12,10 +12,11 @@ const app = express()
 const static = require("./routes/static")
 
 /* ***********************
- * View Emgine and Templates
+ * View Engine and Templates
  *************************/
 app.set("view engine", "ejs")
 app.use(expressLayouts)
+app.use(express.static(__dirname + '/public'));
 app.set("layout", "./layouts/layout") // not at views root
 
 /* ***********************
