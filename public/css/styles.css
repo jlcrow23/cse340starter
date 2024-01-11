@@ -1,9 +1,9 @@
 /******* Change Box Model ***************/
-*,
+/* *,
 *:before,
 *:after {
   box-sizing: border-box;
-}
+} */
 
 h1 {
   color: black;
@@ -11,10 +11,6 @@ h1 {
 .CarDetails {
   background-color: white;
   color: rgb(21, 109, 224);
-}
-.navigation {
-  background-color: black;
-  color: white;
 }
 
 header {
