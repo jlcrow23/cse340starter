@@ -31,7 +31,7 @@ h1 {
 }
 /*Car Details CSS*/
 .carDetails {
-  color: aqua;
+  color: rgb(13, 48, 48);
   padding: 20px;
   background: gray, 0.5;
   background-size:contain;
@@ -43,7 +43,7 @@ h1 {
   list-style-type: none;
 }
 button {
-  background-color: #2c9fc5; /* Blue */
+  background-color: rgb(13, 48, 48); /* Blue */
   border: none;
   border-radius: 8px;
   color: white;
