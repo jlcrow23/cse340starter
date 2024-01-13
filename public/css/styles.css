@@ -10,14 +10,13 @@ html {
 }
 .siteName {
   color:black;
-  font-size: xx-large;
+  font-size: 40px;
 }
 header {
   font-family: 'Lucida Console', sans-serif;
-  background-color: white;
 }
 h1 {
-  font-family: monospace;
+  font-family: verdana, sans-serif;
   color: black;
   font-size: 50px;
 }
@@ -61,6 +60,7 @@ body {
 } 
 #section1 {
   background: url("../images/vehicles/delorean.jpg") center no-repeat;
+  background-size: 25%;
 }
 
 #section2 {
@@ -86,6 +86,33 @@ body {
   font: size 20px;
   color: black;
   text-align: right;
+}
+
+div.extras {
+  margin: 5px;
+  border: 1px solid #2c9fc5;
+  float: left;
+  width: 10%;
+}
+
+div.extras:hover {
+  border: 2px solid black;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+div.bumpCaps {
+  margin: 5px;
+  border: 1px solid #2c9fc5;
+  float: left;
+  width: 10%;
+}
+
+div.bumpCaps:hover {
+  border: 2px solid black;
 }
 
 nav {
