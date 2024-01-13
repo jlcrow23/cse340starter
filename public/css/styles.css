@@ -1,13 +1,16 @@
 /******* Change Box Model ***************/
 *,
 *:before,
-*:after {
-  box-sizing: content-box;
+* {
+  box-sizing: border-box;
 }
+
+/*total page CSS*/
 html {
   background: url(../images/site/checkerboard.jpg);
   background-size: auto;
 }
+/*header CSS*/
 .siteName {
   color:black;
   font-size: 40px;
@@ -23,8 +26,10 @@ h1 {
 .flex-contain {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
 }
+/*Car Details CSS*/
 .carDetails {
   color: aqua;
   padding: 20px;
@@ -48,7 +53,7 @@ button {
   display: inline-block;
   font-size: 16px;
 }
-
+/*body CSS*/
 body {
   border: 5px solid blue;
   padding: 15px; 
@@ -56,7 +61,7 @@ body {
   background: white;
   background-clip: padding-box;
   border-radius: 25px;
-  margin: 20px;
+  margin: 20px 45px 20px 45px;
 } 
 #section1 {
   background: url("../images/vehicles/delorean.jpg") center no-repeat;
@@ -64,22 +69,18 @@ body {
 }
 
 #section2 {
-  display: -webkit-flex;
   display: flex;
+  flex-wrap: wrap;
 }
-
+/*section 2 CSS*/
 .addons {
-  -webkit-flex: 2;
-  -ms-flex: 2;
-  flex: 2;
-  padding: 20px;
+  padding: 10px;
+  flex: 50%;
 }
 
 #reviews {
-  -webkit-flex: 2;
-  -ms-flex: 2;
-  flex: 2;
-  padding: 10px
+  padding: 10px;
+  flex: 50%;
 }
 
 #tools {
@@ -92,29 +93,47 @@ div.extras {
   margin: 5px;
   border: 1px solid #2c9fc5;
   float: left;
-  width: 10%;
+  width: auto;
+  height: auto;
 }
 
 div.extras:hover {
   border: 2px solid black;
 }
 
+.center {
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+  width: 100%;
+  height: auto;
+}
+
 div.desc {
   padding: 15px;
   text-align: center;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 div.bumpCaps {
   margin: 5px;
   border: 1px solid #2c9fc5;
   float: left;
-  width: 10%;
+  width: auto;
+  height: auto;
 }
 
 div.bumpCaps:hover {
   border: 2px solid black;
 }
-
+/*responsive CSS*/
+/* .responsive {
+  padding: 0 6px;
+  float: left;
+  width: 49.9999%;
+} */
+/*navigation bar CSS*/
 nav {
   background-color: black;
   color: white;
@@ -157,7 +176,7 @@ nav ul li a:hover {
 .open li {
   display: block;
 }
-
+/*different screen page view*/
 @media only screen and (min-width: 32.5em) {
   nav ul {
       flex-direction: row;
@@ -171,4 +190,11 @@ nav ul li a:hover {
       display: inline;
       margin: 0 10px;
   }
+  @media only screen and (max-width: 700px) {
+    .addons, #reviews {
+      flex: 100%;
+    }
+  }
+  
+  
 }
