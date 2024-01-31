@@ -176,6 +176,30 @@ nav ul li a:hover {
 .open li {
   display: block;
 }
+
+input[type=email], input[type=password] {
+  width: 25%;
+  padding: 10px;
+  margin: 8px;
+  display: inline-block;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: rgb(55, 55, 144);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px;
+  border: none;
+  cursor: pointer;
+  width: 25%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
 /*different screen page view*/
 @media only screen and (min-width: 32.5em) {
   nav ul {
@@ -190,6 +214,7 @@ nav ul li a:hover {
       display: inline;
       margin: 0 10px;
   }
+
   @media only screen and (max-width: 700px) {
     .addons, #reviews {
       flex: 100%;
@@ -198,3 +223,5 @@ nav ul li a:hover {
   
   
 }
+
+

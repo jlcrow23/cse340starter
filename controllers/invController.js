@@ -23,7 +23,7 @@ invCont.buildByInventoryId = async function (req, res, next) {
     const inventory_id = req.params.inventoryId;
     const data = await invModel.getDetailsByInventoryId(inventory_id);
     if (data.length > 0) {
-    const grid = await utilities.buildDetailGrid(data);
+    const grid = await utilities.buildClassificationGrid(data);
       let nav = await utilities.getNav();
       const model = data[0].inv_model;
       const make = data[0].inv_make;

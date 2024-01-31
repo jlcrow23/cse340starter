@@ -1,0 +1,22 @@
+<!--Content Heading Block-->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+    <!--Message Block-->
+<%# messages() %> <!-- the (#) disables the code while the (-) or unescaped indicator will display it-->
+
+<!--Login Block-->
+<form action="../../controllers/accountController.js" method="post">
+    <div class="login">
+        <label for="account_email"><b>Email</b></label>
+        <input type="email" placeholder="Enter Email Address" name="account_email" required>
+
+        <label for="account_password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="account_password" required>
+
+        <button type="submit">Login</button>
+    </div>
+</form>
