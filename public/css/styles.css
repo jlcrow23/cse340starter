@@ -29,6 +29,19 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
 }
+/*Form CSS*/
+.login {
+  display: flex;
+  flex-wrap: wrap;
+  background-color:rgb(13, 48, 48);
+  border-radius: 5px;
+  border-color: gray;
+  color: white;
+}
+#loginbutt {
+  border-radius: 10px;
+  color:gray;
+}
 /*Car Details CSS*/
 .carDetails {
   color: rgb(13, 48, 48);

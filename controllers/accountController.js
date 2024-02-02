@@ -6,7 +6,7 @@ const accountController = {}
  **************************** */
 accountController.buildLogin = async function (req, res, next) {
     let nav = await utilities.getNav()
-    res.render("./views/account/login", {
+    res.render("account/login", {
         title: "Login",
         nav,
     })
