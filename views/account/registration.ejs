@@ -1,0 +1,31 @@
+<!--Content Heading Block-->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+    <!--Message Block-->
+<%# messages() %> <!-- the (#) disables the code while the (-) or unescaped indicator will display it-->
+
+<!--Registration Block-->
+<form action="/views/account/registration.ejs" method="post">
+    <div class="register">
+        <label for="account_firstname"><b>First name</b></label><br>
+        <input type="text" name="account_firstname" required><br>
+
+        <label for="account_lastname"><b>Last name</b></label><br>
+        <input type="text" name="account_lastname" required><br>
+
+        <label for="account_email"><b>Email address</b></label><br>
+        <input type="email" name="account_email" required><br>
+
+        <label for="account_password"><b>Password</b></label><br>
+        <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
+        <input type="password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"><br>
+     
+        
+
+        <button id ="registerbutt" type="submit">Register</button>
+    </div>
+</form>

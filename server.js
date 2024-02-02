@@ -12,10 +12,13 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const invController = require("./controllers/invController")
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
+const accountController = require("./controllers/accountController")
 const accountRoute = require("./routes/accountRoute")
+const bodyParser = require("body-parser")
 
 /* *******************************
  * Middleware
@@ -38,6 +41,10 @@ app.use(function(req, res, next){
   next()
 })
 
+// BodyParser available
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true})) // for parsing application/x-www-form-urlencoded
+
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -46,6 +53,9 @@ app.use(expressLayouts)
 /* app.use(express.static("public"));*/
 app.use("/public", express.static("public"))
 app.set("layout", "./layouts/layout") // not at views root
+// Route to build login view
+app.get("/login", utilities.handleErrors(accountController.buildLogin))
+
 
 /* ***********************
  * Routes
@@ -56,7 +66,7 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory Routes
 app.use("/inv", utilities.handleErrors(inventoryRoute))
 // Account Routes
-app.use("/account", utilities.handleErrors(accountRoute))
+app.use("/account", require("./routes/accountRoute"), utilities.handleErrors(accountRoute))
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have gotten lost.'})
