@@ -18,7 +18,8 @@ html {
 header {
   font-family: 'Lucida Console', sans-serif;
 }
-h1 {
+
+#welcome {
   font-family: verdana, sans-serif;
   color: black;
   font-size: 50px;
@@ -42,7 +43,7 @@ h1 {
   border-radius: 10px;
   color:gray;
 }
-/*Car Details CSS*/
+/*Home page Car Details CSS*/
 .carDetails {
   color: rgb(13, 48, 48);
   padding: 20px;
@@ -85,6 +86,7 @@ body {
   display: flex;
   flex-wrap: wrap;
 }
+
 /*section 2 CSS*/
 .addons {
   padding: 10px;
@@ -140,12 +142,7 @@ div.bumpCaps {
 div.bumpCaps:hover {
   border: 2px solid black;
 }
-/*responsive CSS*/
-/* .responsive {
-  padding: 0 6px;
-  float: left;
-  width: 49.9999%;
-} */
+
 /*navigation bar CSS*/
 nav {
   background-color: black;
@@ -190,6 +187,39 @@ nav ul li a:hover {
   display: block;
 }
 
+/*Cars in each category CSS*/
+#classview {
+  color:dimgray;
+  font-size: 50px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.inv-display {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  list-style-type: none;
+}
+#inv-details {
+  text-align: center;
+  background-color: dimgray;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+}
+.namePrice {
+  color:dimgray;
+  font-size: 18px;
+}
+#details-title {
+  color:darkslateblue;
+}
+.detail-price {
+  font-style: bold;
+  font-size: 30px;
+}
+
+/*My Account CSS*/
 input[type=email], input[type=password] {
   width: 25%;
   padding: 10px;
@@ -225,7 +255,7 @@ button:hover {
   opacity: 0.8;
 }
 
-/*different screen page view*/
+/*different screen size page view*/
 @media only screen and (min-width: 32.5em) {
   nav ul {
       flex-direction: row;
@@ -244,6 +274,11 @@ button:hover {
     .addons, #reviews {
       flex: 100%;
     }
+    #detailsimg {
+      max-width: 100%;
+      height: auto; 
+    }
+    
   }
   
   

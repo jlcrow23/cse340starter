@@ -23,17 +23,17 @@ Util.getNav = async function (req,res,next) {
 Util.buildClassificationGrid = async function(data){
     let grid = ""
     if(data.length > 0){
-        grid = '<ul id="inv-display">'
+        grid = '<ul class="inv-display">'
         data.forEach(vehicle => {
             grid += '<li>'
             grid += '<a href="/inv/details/'+ vehicle.inv_id + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model + ' details"><img src="' + vehicle.inv_thumbnail +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model +' on CSE Motors" /></a>'
             grid += '<div class="namePrice">'
-            grid += '<hr />'
             grid += '<h2>'
             grid += '<a href="/inv/details/' + vehicle.inv_id +'" title="View ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
             grid += '</h2>'
             grid += '<span>$' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
             grid += '</div>'
+            grid += '<hr />'
             grid += '</li>'
         })
         grid += '</ul>'
@@ -49,13 +49,21 @@ Util.buildClassificationGrid = async function(data){
 Util.buildInventoryDetails = async function(data){
     let invDesc = ""
     if(data.length > 0){
-        invDesc += '<p id="inv-details">'
+        invDesc += '<div class="detailpage">'
         data.forEach(vehicle => {
+            invDesc += '<h2>' + vehicle.inv_year + '</h2>'
+            invDesc += '<img id="detailsimg" src="' + vehicle.inv_image + '"alt="Image of '+ vehicle.inv_year + ' ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' on CSE Motors" style="max-width:100%" />'
+            invDesc += '<br />'
+            invDesc += '<h3 class="detail-price">$' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</h3>'
+            invDesc += '<section id="inv-details">'
             invDesc += vehicle.inv_description
+            invDesc += '<h3 id="detail-miles">Miles: ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</h3>'
+            invDesc += '</section>'
+            
         })
-        invDesc += '</p>'
+        
     } else {
-        invDesc += '<p class="notic">Sorry, no matching description could be found.</p>'
+        invDesc += '<p class="notice">Sorry, no matching description could be found.</p>'
     }
     return invDesc
 }

@@ -24,22 +24,24 @@ invCont.buildByClassificationId = async function (req, res, next) {
 * ******************************/
 invCont.buildByInventoryId = async function (req, res, next) {
     const inv_id = req.params.inventoryId;
-    const data = await invModel.getInventoryByClassificationId(inv_id);
+    const data = await invModel.getDetailsByInventoryId(inv_id);
     const invDesc = await utilities.buildInventoryDetails(data);
-    let nav = await utilities.getNav();
-    const model = data[0].inv_model;
-    const make = data[0].inv_make;
-      
-    res.render("./inventory/details", {
-      title: make + " " + model,
-      invDesc,
-      nav,
+    if(data.length > 0) {
+      const grid = await utilities.buildClassificationGrid(data);
+      let nav = await utilities.getNav();
+      const make = data[0].inv_make;
+      const model = data[0].inv_model;
+      res.render("./inventory/details", {
+        title: make + " " + model,
+        invDesc,
+        grid,
+        nav,
     });
-    // } else {
-    //   const err = new Error("Not Found");
-    //   err.status = 404;
-    //   next(err);
-    // }
+    } else {
+      const err = new Error("Not Found");
+      err.status = 404;
+      next(err);
+    }
   }
 
 module.exports = invCont

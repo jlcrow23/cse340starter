@@ -28,7 +28,7 @@ async function getInventoryByClassificationId(classification_id) {
 async function getDetailsByInventoryId(inv_id) {
     try {
         const data = await pool.query(
-            "SELECT inv_description FROM public.inventory WHERE inv_id = $1", [inv_id]
+            "SELECT * FROM public.inventory AS i JOIN public.classification AS c ON i.classification_id = c.classification_id WHERE inv_id = $1", [inv_id]
         )
         return data.rows
     } catch (error) {
