@@ -12,31 +12,34 @@ invCont.buildByClassificationId = async function (req, res, next) {
     const grid = await utilities.buildClassificationGrid(data)
     let nav = await utilities.getNav()
     const className = data[0].classification_name
-    res.render("../views/inventory/classification", {
+    res.render("./inventory/classification", {
         title: className + " vehicles", 
         nav, 
         grid,
     })
 }
 
+/* ******************************
+* Build inventory by details view
+* ******************************/
 invCont.buildByInventoryId = async function (req, res, next) {
-    const inventory_id = req.params.inventoryId;
-    const data = await invModel.getDetailsByInventoryId(inventory_id);
-    if (data.length > 0) {
-    const grid = await utilities.buildClassificationGrid(data);
-      let nav = await utilities.getNav();
-      const model = data[0].inv_model;
-      const make = data[0].inv_make;
-      res.render("./inventory/detail", {
-        title: make + " " + model,
-        nav,
-        grid,
-      });
-    } else {
-      const err = new Error("Not Found");
-      err.status = 404;
-      next(err);
-    }
+    const inv_id = req.params.inventoryId;
+    const data = await invModel.getInventoryByClassificationId(inv_id);
+    const invDesc = await utilities.buildInventoryDetails(data);
+    let nav = await utilities.getNav();
+    const model = data[0].inv_model;
+    const make = data[0].inv_make;
+      
+    res.render("./inventory/details", {
+      title: make + " " + model,
+      invDesc,
+      nav,
+    });
+    // } else {
+    //   const err = new Error("Not Found");
+    //   err.status = 404;
+    //   next(err);
+    // }
   }
 
 module.exports = invCont
