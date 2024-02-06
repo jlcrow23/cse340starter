@@ -55,6 +55,7 @@ app.use("/public", express.static("public"))
 app.set("layout", "./layouts/layout") // not at views root
 // Route to build login view
 app.get("/login", utilities.handleErrors(accountController.buildLogin))
+app.get("/register", utilities.handleErrors(accountController.registerAccount))
 
 
 /* ***********************

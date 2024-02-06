@@ -61,11 +61,71 @@ Util.buildInventoryDetails = async function(data){
             invDesc += '</section>'
             
         })
+        invDesc += '</div>'
         
     } else {
         invDesc += '<p class="notice">Sorry, no matching description could be found.</p>'
     }
     return invDesc
+}
+
+/* ****************************
+* Build Form for Login
+* ****************************/
+Util.buildLoginForm = async function(req,res,next) {
+    let logForm = ""
+    logForm += '<div class="logform">'
+        logForm += '<form action="./../../controllers/accountController.ejs" method="post" id="loginForm">'
+        logForm += '<label for="account_email"><b>Email: </b></label><br />'
+        logForm += '<input type="email" placeholder="Enter Email Address" name="account_email" require <%= account.account_email %><br />'
+        logForm += '<label for="account_password"><b>Password: </b></label><br />'
+        logForm += '<input type="password" placeholder="Enter Password" name="account_password" require><br />'
+        logForm += '<button id="loginbutt" type="submit">LOGIN</button>'
+        logForm += '</form>'
+        logForm += '</div>'
+        return logForm
+    }
+    
+/* *****************************
+* Build Registration Form
+* *****************************/
+Util.buildRegistrationForm = async function(req, res, next) {
+    let regForm = ""
+    
+    regForm += '<div class="register"></div>'
+    regForm += '<form action="/account/register" method="post">'
+    
+    regForm += '<label for="account_firstname"><b>First name</b></label><br />'
+    regForm += '<input type="text" name="account_firstname" required <%= account.account_firstname %><br>'
+
+    regForm += '<label for="account_lastname"><b>Last name</b></label><br />'
+    regForm += '<input type="text" name="account_lastname" required <%= account.account_lastname %><br />'
+
+    regForm += '<label for="account_email"><b>Email address</b></label><br />'
+    regForm += '<input type="email" name="account_email" required <%= account.account_email %><br />'
+
+    regForm += '<label for="account_password"><b>Password</b></label><br />'
+    regForm += '<span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>'
+    regForm += '<input type="password" name="account_password" id="pword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*?[0-9])(?=.*?[~`!@#$%\^&*()\-_=+[\]{};:\x27.,\x22\\|/?]){12,}"><br />'
+
+    regForm += '<button id ="registerbutt" type="submit">Register</button>'
+    regForm += '</form>'
+    regForm += '</div>'
+
+    
+    return regForm
+    // const registerbutt = document.querySelector("#registerbutt");
+    //     registerbutt.addEventListener("Click", function(){
+    //         const regInput = document.getElementById("pword");
+    //         const type = regInput.getAttribute("type");
+    //         if (type == "password"){
+    //             regInput.setAttribute("type", "text");
+    //             registerbutt.innerHTML = "Hide Password";
+    //         } else {
+    //             regInput.setAttribute("type", "password");
+    //             registerbutt.innerHTML = "Show Password";
+    //         }
+    //     })
 }
 
 

@@ -9,14 +9,5 @@
 <%# messages() %> <!-- the (#) disables the code while the (-) or unescaped indicator will display it-->
 
 <!--Login Block-->
-<form id="loginForm" action="/account/login" method="post">
-    <div class="login">
-        <label for="account_email"><b>Email:</b></label><br>
-        <input type="email" placeholder="Enter Email Address" name="account_email" required <%= locals.account_email %>><br>
-
-        <label for="account_password"><b>Password:</b></label><br>
-        <input type="password" placeholder="Enter Password" name="account_password" required><br>
-
-        <button id ="loginbutt" type="submit">LOGIN</button>
-    </div>
-</form>
+<%- logForm %>
+<a title="Click to register" href="/account/registration">Register Here</a>
