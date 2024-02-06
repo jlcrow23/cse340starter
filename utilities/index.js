@@ -75,11 +75,12 @@ Util.buildInventoryDetails = async function(data){
 Util.buildLoginForm = async function(req,res,next) {
     let logForm = ""
     logForm += '<div class="logform">'
-        logForm += '<form action="./../../controllers/accountController.ejs" method="post" id="loginForm">'
+        logForm += '<form action="/account/login/" method="post" id="loginForm">'
         logForm += '<label for="account_email"><b>Email: </b></label><br />'
-        logForm += '<input type="email" placeholder="Enter Email Address" name="account_email" require <%= account.account_email %><br />'
+        logForm += '<input type="email" placeholder="Enter a valid email address" name="account_email" required <%= account.account_email %><br />'
         logForm += '<label for="account_password"><b>Password: </b></label><br />'
-        logForm += '<input type="password" placeholder="Enter Password" name="account_password" require><br />'
+        logForm += '<span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span><br />'
+        logForm += '<input type="password" placeholder="Enter Password" name="account_password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*?[0-9])(?=.*?[~`!@#$%\^&*()\-_=+[\]{};:\x27.,\x22\\|/?]){12,}"><br />'
         logForm += '<button id="loginbutt" type="submit">LOGIN</button>'
         logForm += '</form>'
         logForm += '</div>'
@@ -92,7 +93,7 @@ Util.buildLoginForm = async function(req,res,next) {
 Util.buildRegistrationForm = async function(req, res, next) {
     let regForm = ""
     
-    regForm += '<div class="register"></div>'
+    regForm += '<div class="register">'
     regForm += '<form action="/account/register" method="post">'
     
     regForm += '<label for="account_firstname"><b>First name</b></label><br />'
@@ -105,7 +106,7 @@ Util.buildRegistrationForm = async function(req, res, next) {
     regForm += '<input type="email" name="account_email" required <%= account.account_email %><br />'
 
     regForm += '<label for="account_password"><b>Password</b></label><br />'
-    regForm += '<span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>'
+    regForm += '<span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span><br />'
     regForm += '<input type="password" name="account_password" id="pword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*?[0-9])(?=.*?[~`!@#$%\^&*()\-_=+[\]{};:\x27.,\x22\\|/?]){12,}"><br />'
 
     regForm += '<button id ="registerbutt" type="submit">Register</button>'

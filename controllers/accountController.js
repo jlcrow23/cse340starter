@@ -37,7 +37,7 @@ async function buildRegistration (req, res, next) {
 * ***************************/
 async function registerAccount (req, res, next) {
     let nav = await utilities.getNav()
-    const { account_firstname, account_lastname, account_email, account_password} = req.body
+    const { account_firstname, account_lastname, account_email, account_password} = req.body    
 
     // Hash the password before storing
     let hashedPassword
@@ -46,13 +46,13 @@ async function registerAccount (req, res, next) {
         hashedPassword = await bcrypt.hashSync(account_password, 10)
     } catch (error) {
         req.flash("notice", 'Sorry, there was an error processing the registration.')
-        res.status(500).render("./account/register", {
-            title: "Registration",
+        res.status(500).render("./account/registration", {
+            title: "Register",
             nav,
             errors: null,
         })
     }
-
+    const logForm = await utilities.buildLoginForm();
     const regResult = await acctModel.registerAccount(
         account_firstname,
         account_lastname,
@@ -68,17 +68,18 @@ async function registerAccount (req, res, next) {
         )
         res.status(201).render("./account/login", {
             title: "Login",
+            logForm,
             nav,
             errors: null,
         })
     } else {
         req.flash("notice", "Sorry, the registration failed.")
-        res.status(501).render("./account/register", {
-            title: "Registration",
+        res.status(501).render("./account/registration", {
+            title: "Register",
             nav,
             errors: null,
         })
-    }
-}
+    } 
+} 
 
 module.exports = { buildLogin, buildRegistration, registerAccount}

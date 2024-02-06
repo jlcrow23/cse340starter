@@ -255,6 +255,18 @@ button:hover {
   opacity: 0.8;
 }
 
+input:required:invalid, input:focus:invalid {
+  background-image: url(/public/images/invalid.jpg);
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+
+input:required:valid {
+  background-image: url(/public/images/valid.jpg);
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+
 /*different screen size page view*/
 @media only screen and (min-width: 32.5em) {
   nav ul {
