@@ -12,7 +12,7 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
-const invController = require("./controllers/invController")
+const invCont = require("./controllers/invController")
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
@@ -56,6 +56,8 @@ app.set("layout", "./layouts/layout") // not at views root
 // Route to build login view
 app.get("/login", utilities.handleErrors(accountController.buildLogin))
 app.get("/register", utilities.handleErrors(accountController.registerAccount))
+app.get("/management", utilities.handleErrors(invCont.buildManagementPage))
+
 
 
 /* ***********************
@@ -68,6 +70,7 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", utilities.handleErrors(inventoryRoute))
 // Account Routes
 app.use("/account", require("./routes/accountRoute"), utilities.handleErrors(accountRoute))
+app.use("/inventory", require("./routes/inventoryRoute"), utilities.handleErrors(inventoryRoute))
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have gotten lost.'})

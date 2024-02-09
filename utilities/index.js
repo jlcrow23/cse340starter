@@ -104,7 +104,7 @@ Util.buildRegistrationForm = async function(req, res, next) {
 
     regForm += '<label for="account_email"><b>Email address</b></label><br />'
     regForm += '<input type="email" name="account_email" required <%= account.account_email %><br />'
-
+    
     regForm += '<label for="account_password"><b>Password</b></label><br />'
     regForm += '<span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span><br />'
     regForm += '<input type="password" name="account_password" id="pword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*?[0-9])(?=.*?[~`!@#$%\^&*()\-_=+[\]{};:\x27.,\x22\\|/?]){12,}"><br />'
@@ -115,20 +115,53 @@ Util.buildRegistrationForm = async function(req, res, next) {
 
     
     return regForm
-    // const registerbutt = document.querySelector("#registerbutt");
-    //     registerbutt.addEventListener("Click", function(){
-    //         const regInput = document.getElementById("pword");
-    //         const type = regInput.getAttribute("type");
-    //         if (type == "password"){
-    //             regInput.setAttribute("type", "text");
-    //             registerbutt.innerHTML = "Hide Password";
-    //         } else {
-    //             regInput.setAttribute("type", "password");
-    //             registerbutt.innerHTML = "Show Password";
-    //         }
-    //     })
 }
 
+Util.buildClassificationAdd = async function(req,res,next) {
+
+    let newClass = ""
+    newClass += '<form action="./inventory/add-classification" id="addClass">'
+
+    newClass += '<label for="classification_name">Classification: </label>'
+    newClass += '<input type="text" placeholder="Classification Name" name="classification_name" required pattern="[a-z][A-Z][0-9](?!.* )">'
+
+    newClass +='<button id="classbutt" type="submit">CREATE</button>'
+    newClass ='</form>'
+
+    return newClass
+}
+
+Util.buildNewCarForm = async function(req,res,next) {
+    let newInv = ""
+    newInv += '<form action="./inventory/addInventory" id="addCar">'
+    newInv += '<label for="inv_make">Make: </label>'
+    newInv += '<input type="text" placeholder="Make" name="inv_make" required <%= inventory.inv_make %> pattern="[a-z][A-Z]" value="Unknown">'
+    newInv += '<label for="inv_model">Model: </label>'
+    newInv += '<input type="text" placeholder="Model" name="inv_model" required <%= inventory.inv_model %> pattern="[a-z][A-Z][0-9]" value="Unknown">'
+    newInv += '<label for="inv_year">Year: </label>'
+    newInv += '<input type="number" placeholder="Year" name="inv_year" min="1901" max="2099" step="1" required <%= inventory.inv_year %>  value="Unknown">'
+    newInv += '<label for="inv_description">Description: </label>'
+    newInv += '<input type="text" placeholder="Description" name="inv_description" required <%= inventory.inv_description %> pattern="[a-z][A-Z][0-9][.\!\-\_]" value="Unknown">'
+    newInv += '<label for="inv_image">Image: </label>'
+    newInv += '<input type="file" name="inv_image" required <%= inventory.inv_image %> value="../public/images/vehicles/no-image.png">'
+    newInv += '<label for="inv_thumbnail">Thumbnail Image: </label>'
+    newInv += '<input type="file" name="inv_thumbnail" required <%= inventory.inv_thumbnail %> value="../public/images/vehicles/no-image-tn.png">'
+    newInv += '<label for="inv_price">Price: </label>'
+    newInv += '<input type="number" placeholder="Price" name="inv_price" min="1" step="any" required <%= inventory.inv_price %> pattern="[0-9]" value="0000">'
+    newInv += '<label for="inv_miles">Miles: </label>'
+    newInv += '<input type="number" name="inv_miles" required <%= inventory.inv_miles %> value="0000000">'
+    newInv += '<label for="inv_color">Color: </label>'
+    newInv += '<input type="text" name="inv_color" required <%= inventory.inv_color %> value="Unknown">'
+    newInv += '<label for="classification_name">Classification: </label>'
+    newInv += '<select name="classification_name" required <%= classification.classification_name %>>'
+    newInv += '<option value="Custom">Custom</option>'
+    newInv += '<option value="Sport">Sport</option>'
+    newInv += '<option value="SUV">SUV</option>'
+    newInv += '<option value="Truck">Truck</option>'
+    newInv += '<option value="Sedan">Sedan</option></select>'
+
+    return newInv
+}
 
 /* *******************************
 * Middleware For Handling Errors

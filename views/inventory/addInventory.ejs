@@ -1,12 +1,10 @@
 <!--Content Heading Block-->
 <% if (title) { %>
-    <h1 id="details-title"><%= title %></h1>
+    <h1><%= title %></h1>
     <% } else {
         res.redirect('/')
     } %>
-    
-    <!--Message Block-->
+<!--Message Block-->
     <%- messages() %> <!-- the (#) disables the code while the (-) or unescaped indicator will display it-->
 
-    <!--Inventory Details-->
-    <%- invDesc %>
+<%- newInv  %>
