@@ -66,20 +66,54 @@ validate.checkRegData = async (req, res, next) => {
 /* *****************************
 * Login Validation
 * ******************************/
-//valid email is required and cannot already exist in the DB
+//valid email is required must already exist in the DB
 validate.loginRules = () => {
     return [
         body("account_email")
         .trim()
+        .notEmpty()
         .isEmail()
         .normalizeEmail() // refer to validator.js docs
         .withMessage("A valid email is required.")
         .custom(async (account_email) => {
             const emailExists = await accountModel.checkExistingEmail(account_email)
             if (emailExists){
-                throw new Error("Email exists. Please log in or use different email")
+                next()
+            } else {
+                throw new Error("Please log in with a valid email or register.")
             }
+        }),
+
+        // password is required and must be strong
+        body("account_password")
+        .trim()
+        .isStrongPassword({
+            minLength: 12,
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1,
+            minSymbols: 1,
         })
+        .withMessage("Please enter a valid password.")
     ]
+}
+
+//valid login data
+validate.checkLoginData = async (req, res, next) => {
+    const { account_email, account_password } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        res.render("/account/login", {
+            errors,
+            title: "Login",
+            nav,
+            account_email,
+            account_password,
+        })
+        return
+    }
+    next()
 }
 module.exports = validate

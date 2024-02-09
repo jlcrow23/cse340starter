@@ -1,5 +1,8 @@
+const { accountLogin } = require("../controllers/accountController")
 const invModel = require("../models/inventory-model")
 const Util = {}
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 /* *************************
 * Constructs the nav HTML unordered list
@@ -75,7 +78,7 @@ Util.buildInventoryDetails = async function(data){
 Util.buildLoginForm = async function(req,res,next) {
     let logForm = ""
     logForm += '<div class="logform">'
-        logForm += '<form action="/account/login/" method="post" id="loginForm">'
+        logForm += '<form id="loginForm" action="/account/login" method="post" >'
         logForm += '<label for="account_email"><b>Email: </b></label><br />'
         logForm += '<input type="email" placeholder="Enter a valid email address" name="account_email" required <%= account.account_email %><br />'
         logForm += '<label for="account_password"><b>Password: </b></label><br />'
@@ -97,13 +100,13 @@ Util.buildRegistrationForm = async function(req, res, next) {
     regForm += '<form action="/account/register" method="post">'
     
     regForm += '<label for="account_firstname"><b>First name</b></label><br />'
-    regForm += '<input type="text" name="account_firstname" required <%= account.account_firstname %><br>'
+    regForm += '<input type="text" name="account_firstname" required value="<%= locals.account_firstname %>"><br>'
 
     regForm += '<label for="account_lastname"><b>Last name</b></label><br />'
-    regForm += '<input type="text" name="account_lastname" required <%= account.account_lastname %><br />'
+    regForm += '<input type="text" name="account_lastname" required value="<%= locals.account_lastname %>"><br />'
 
     regForm += '<label for="account_email"><b>Email address</b></label><br />'
-    regForm += '<input type="email" name="account_email" required <%= account.account_email %><br />'
+    regForm += '<input type="email" name="account_email" required value="<%= locals.account_email %>"><br />'
     
     regForm += '<label for="account_password"><b>Password</b></label><br />'
     regForm += '<span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span><br />'
@@ -117,13 +120,14 @@ Util.buildRegistrationForm = async function(req, res, next) {
     return regForm
 }
 
+
 Util.buildClassificationAdd = async function(req,res,next) {
 
     let newClass = ""
     newClass += '<form action="./inventory/add-classification" id="addClass">'
 
     newClass += '<label for="classification_name">Classification: </label>'
-    newClass += '<input type="text" placeholder="Classification Name" name="classification_name" required pattern="[a-z][A-Z][0-9](?!.* )">'
+    newClass += '<input type="text" placeholder="Classification Name" name="classification_name" required value="<%= locals.classification_name %>" pattern="[a-z][A-Z][0-9](?!.* )">'
 
     newClass +='<button id="classbutt" type="submit">CREATE</button>'
     newClass ='</form>'
@@ -153,7 +157,7 @@ Util.buildNewCarForm = async function(req,res,next) {
     newInv += '<label for="inv_color">Color: </label>'
     newInv += '<input type="text" name="inv_color" required <%= inventory.inv_color %> value="Unknown">'
     newInv += '<label for="classification_name">Classification: </label>'
-    newInv += '<select name="classification_name" required <%= classification.classification_name %>>'
+    newInv += '<select name="classification_name" required <%= locals.classification_name %>>'
     newInv += '<option value="Custom">Custom</option>'
     newInv += '<option value="Sport">Sport</option>'
     newInv += '<option value="SUV">SUV</option>'
@@ -169,5 +173,28 @@ Util.buildNewCarForm = async function(req,res,next) {
 * Genereal Error Handling
 ********************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+/* *******************************
+ * Middleware to check token validity
+ *********************************/
+Util.checkJWTToken = (req, res, next) => {
+    if (req.cookies.jwt) {
+        jwt.verify(
+            req.cookies.jwt,
+            process.env.ACCESS_TOKEN_SECRET,
+            function (err, accountData) {
+                if (err) {
+                    req.flash("Please log in")
+                    res.clearCookie("jwt")
+                    return res.redirect("/account/login")
+                }
+                res.locals.accountData = accountData
+                res.locals.loggedin = 1
+                next()
+            })
+    } else {
+        next()
+    }
+}
 
 module.exports = Util

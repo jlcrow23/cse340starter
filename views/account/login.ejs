@@ -8,6 +8,15 @@
     <!--Message Block-->
 <%- messages() %> <!-- the (#) disables the code while the (-) or unescaped indicator will display it-->
 
+<% if (errors) { %>
+    <ul class="notice">
+        <% erros.array().forEach(error => { %>
+            <li><%= error.msg %> </li>
+<%   })   %>        
+       
+    </ul>
+<% } %>
+
 <!--Login Block-->
 <%- logForm %>
 <a title="Click to register" href="/account/registration">Register Here</a>
