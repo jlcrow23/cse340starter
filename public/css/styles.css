@@ -30,7 +30,7 @@ header {
   flex-wrap: wrap;
   justify-content: center;
 }
-/*Form CSS*/
+/*Login Form CSS*/
 .login {
   display: flex;
   flex-wrap: wrap;
@@ -56,16 +56,23 @@ header {
 .details {
   list-style-type: none;
 }
+
 button {
-  background-color: rgb(13, 48, 48); /* Blue */
-  border: none;
-  border-radius: 8px;
+  background-color: rgb(55, 55, 144);
   color: white;
   padding: 15px 32px;
+  margin: 8px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 20em;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
+}
+
+button:hover {
+  opacity: 0.8;
 }
 /*body CSS*/
 body {
@@ -79,7 +86,7 @@ body {
 } 
 #section1 {
   background: url("../images/vehicles/delorean.jpg") center no-repeat;
-  background-size: 25%;
+  background-size: 35%;
 }
 
 #section2 {
@@ -220,8 +227,26 @@ nav ul li a:hover {
 }
 
 /*My Account CSS*/
-input[type=email], input[type=password] {
-  width: 25%;
+
+form * {
+  display: block;
+}
+
+fieldset {
+  display: block;
+  margin-left: 2em;
+  margin-right: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 2px groove (internal value);
+  border-radius: 25px;
+  background-color: rgb(219, 219, 241);
+}
+
+input {
+  width: 20em;
   padding: 10px;
   margin: 8px;
   display: inline-block;
@@ -230,41 +255,50 @@ input[type=email], input[type=password] {
 }
 
 input:required:invalid, input:focus:invalid {
-  background-image: url(/images/invalid.jpg);
+  background-image: url(https://clipground.com/images/invalid-png-2.png);
+  background-image: auto;
   background-position: right top;
   background-repeat: no-repeat;
  }
  
   input:required:valid {
-  background-image: url(/images/valid.jpg);
+  background-image: url(https://codeopinion.com/wp-content/uploads/2016/04/validation.png);
+  background-size:auto;
   background-position: right top;
   background-repeat: no-repeat;
   }
 
-button {
+/*Inventory Management*/
+
+#newClassBtn:link, #newClassBtn:visited, #newCarBtn:link, #newCarBtn:visited {
   background-color: rgb(55, 55, 144);
   color: white;
-  padding: 14px 20px;
+  padding: 15px 32px;
   margin: 8px;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
   width: 25%;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
 }
 
-button:hover {
-  opacity: 0.8;
+#newClassBtn:hover, #newClassBtn:active, #newCarBtn:hover, #newCarBtn:active {
+  background-color: rgb(95, 95, 145);
 }
 
-input:required:invalid, input:focus:invalid {
-  background-image: url(/public/images/invalid.jpg);
-  background-position: right top;
-  background-repeat: no-repeat;
+input[type=file] {
+  border: none;
 }
 
-input:required:valid {
-  background-image: url(/public/images/valid.jpg);
-  background-position: right top;
-  background-repeat: no-repeat;
+select {
+  width: 20em;
+  padding: 10px;
+  margin: 8px;
+  display: inline-block;
+  border: 1px solid black;
+  box-sizing: border-box;
 }
 
 /*different screen size page view*/

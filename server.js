@@ -8,18 +8,20 @@
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
-const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const invCont = require("./controllers/invController")
 const utilities = require("./utilities/")
+const flash = require("connect-flash")
 const session = require("express-session")
 const pool = require('./database/')
 const accountController = require("./controllers/accountController")
 const accountRoute = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+
+const app = express()
 
 /* *******************************
  * Middleware
@@ -50,7 +52,7 @@ app.use(bodyParser.urlencoded({ extended: true})) // for parsing application/x-w
 app.use(cookieParser())
 
 // check validity
-app.use(utilities.checkJWTToken)
+// app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates
@@ -62,8 +64,14 @@ app.use("/public", express.static("public"))
 app.set("layout", "./layouts/layout") // not at views root
 // Route to build login view
 app.get("/login", utilities.handleErrors(accountController.buildLogin))
+// Route for registration view
+app.get("/registration", utilities.handleErrors(accountController.buildRegistration))
 app.get("/register", utilities.handleErrors(accountController.registerAccount))
 app.get("/management", utilities.handleErrors(invCont.buildManagementPage))
+app.get("/add-classification", utilities.handleErrors(invCont.buildNewClass))
+app.get("/newClassAdd", utilities.handleErrors(invCont.addClassification))
+app.get("/addInventory", utilities.handleErrors(invCont.buildInventoryPage))
+app.get("/newCarAdd", utilities.handleErrors(invCont.addCarToDatabase))
 
 
 
@@ -74,7 +82,7 @@ app.use(static)
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory Routes
-app.use("/inv", utilities.handleErrors(inventoryRoute))
+app.use("/inv", require("./routes/inventoryRoute"), utilities.handleErrors(inventoryRoute))
 // Account Routes
 app.use("/account", require("./routes/accountRoute"), utilities.handleErrors(accountRoute))
 app.use("/inventory", require("./routes/inventoryRoute"), utilities.handleErrors(inventoryRoute))

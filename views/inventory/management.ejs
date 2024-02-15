@@ -9,5 +9,9 @@
     <%- messages() %> <!-- the (#) disables the code while the (-) or unescaped indicator will display it-->
 
     <!--Management View-->
-    <a title="Click to add a class of vehicles" href="/inventory/add-classification">New Classification</a>
-    <a title="Click to add a new vehicle to the database" href="/inventory/addInventory">New Car</a>
+<fieldset>
+    <p>Click the button to add a new classification of vehicles</p>
+    <a href="/inventory/add-classification" id="newClassBtn">New Classification</a>
+    <p>Click the button to add a new vehicle to the inventory</p>
+    <a href="/inventory/addInventory" id="newCarBtn">New Car</a>
+</fieldset>

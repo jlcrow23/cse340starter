@@ -6,10 +6,10 @@
     } %>
 
     <!--Message Block-->
-<%# messages() %> <!-- the (#) disables the code while the (-) or unescaped indicator will display it-->
+<%- messages() %> <!-- the (#) disables the code while the (-) or unescaped indicator will display it-->
 <% if (errors) { %>
     <ul class="notice">
-        <% erros.array().forEach(error => { %>
+        <% errors.array().forEach(error => { %>
             <li><%= error.msg %> </li>
 <%   })   %>        
        
@@ -17,5 +17,26 @@
 <% } %>
 
 <!--Registration Block-->
-<%- regForm  %>
-<a title="Click to Login" href="/account/login">Login Here</a>
+<p>All fields are required.</p>
+<div class="registerContainer">
+    <form id="registerForm" action="/account/register" method="post">
+        <fieldset>
+            <label for="account_firstname"><b>First name</b></label>
+            <input type="text" placeholder="First Name" name="account_firstname" id="accountFirstname" required value="<% locals.account_firstname %>">
+
+            <label for="account_lastname"><b>Last name</b></label>
+            <input type="text" placeholder="Last Name"name="account_lastname" required value="<% locals.account_lastname %>">
+
+            <label for="account_email"><b>Email address</b></label>
+            <input type="email" placeholder="Email Address"name="account_email" required value="<% locals.account_email %>">
+    
+            <label for="account_password"><b>Password</b></label>
+            <div>Passwords must be a minimun of 12 character and contain at least 1 number, 1 capital letter, and 1 special character</div>
+            <input type="password" placeholder="Password" name="account_password" id="pword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* ).{12,}">
+    
+            <button type="submit">REGISTER</button>
+        </fieldset>
+    </form>
+</div>
+
+<p>Already registered? <a title="Click to Login" href="/account/login">Login Here</a></p>

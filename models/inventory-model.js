@@ -39,14 +39,12 @@ async function getDetailsByInventoryId(inv_id) {
 /* ***************************
 * New Classification Add
 * ************************** */
-async function addClassificationId(classification_name) {
+async function addClassificationName(classification_name) {
     try{
-        const data = await pool.query(
-            "INSERT INTO public.classification VALUES ($1)", [classification_name]
-        )
-        return data.rows
+        const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
+        return await pool.query(sql, [classification_name])
     } catch (error) {
-        console.error("addClassificationId error" + error)
+        return error.message
     }
 }
 
@@ -55,17 +53,15 @@ async function addClassificationId(classification_name) {
 * ************************** */
 async function addNewCar(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_name) {
     try{
-        const data = await pool.query(
-            "INSERT INTO public.inventory VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)", 
-            [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color],
+        const sql =
+            "INSERT INTO inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *"
 
-            "INSERT INTO public.classification VALUES ($10)",
-            [classification_name]
-        )
-        return data.rows
+            "INSERT INTO classification (classification_name) VALUES ($10) RETURNING *"
+            
+            return await pool.query(sql, [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_name]) 
     } catch (error) {
-        console.error("addClassificationId error" + error)
+        return error.message
     }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getDetailsByInventoryId, addClassificationId, addNewCar};
+module.exports = {getClassifications, getInventoryByClassificationId, getDetailsByInventoryId, addClassificationName, addNewCar};

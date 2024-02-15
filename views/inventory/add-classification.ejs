@@ -8,4 +8,11 @@
 <!--Message Block-->
 <%- messages() %> <!-- the (#) disables the code while the (-) or unescaped indicator will display it-->
 
-<%- newClass  %>
+<form action="/inventory/newClassAdd" id="addClass" method="post">
+    <fieldset>
+        <label for="classification_name">Classification: </label>
+        <input type="text" placeholder="Classification Name" name="classification_name" required value="<%= locals.classification_name %>" pattern="[A-Za-z]{.}" title="Letters only">
+
+        <button type="submit">CREATE</button>
+    </fieldset>
+</form>
