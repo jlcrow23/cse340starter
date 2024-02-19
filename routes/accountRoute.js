@@ -21,7 +21,7 @@ router.post(
 
 //Process the login attempt
 router.post(
-    "/management",
+    "/account",
     regValidate.loginRules(),
     regValidate.checkLoginData,
     utilities.handleErrors(accountController.accountLogin)

@@ -65,7 +65,7 @@ app.set("layout", "./layouts/layout") // not at views root
 // Route to build login view
 app.get("/login", utilities.handleErrors(accountController.buildLogin))
 // Route for Processing Login
-app.get("/account/", utilities.handleErrors(accountController.buildAcctManagement))
+app.get("/account", utilities.handleErrors(accountController.buildAcctManagement))
 // Route for registration view
 app.get("/registration", utilities.handleErrors(accountController.buildRegistration))
 // Route for process registration
