@@ -52,7 +52,7 @@ app.use(bodyParser.urlencoded({ extended: true})) // for parsing application/x-w
 app.use(cookieParser())
 
 // check validity
-// app.use(utilities.checkJWTToken)
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates
@@ -64,14 +64,23 @@ app.use("/public", express.static("public"))
 app.set("layout", "./layouts/layout") // not at views root
 // Route to build login view
 app.get("/login", utilities.handleErrors(accountController.buildLogin))
+// Route for Processing Login
+app.get("/account/", utilities.handleErrors(accountController.buildAcctManagement))
 // Route for registration view
 app.get("/registration", utilities.handleErrors(accountController.buildRegistration))
+// Route for process registration
 app.get("/register", utilities.handleErrors(accountController.registerAccount))
+// Route for Inventory Management view
 app.get("/management", utilities.handleErrors(invCont.buildManagementPage))
+// Route for Add Class View
 app.get("/add-classification", utilities.handleErrors(invCont.buildNewClass))
+// Route to add Class to database
 app.get("/newClassAdd", utilities.handleErrors(invCont.addClassification))
+// Route for Add Inventory View
 app.get("/addInventory", utilities.handleErrors(invCont.buildInventoryPage))
+// Route to Add Car to database
 app.get("/newCarAdd", utilities.handleErrors(invCont.addCarToDatabase))
+
 
 
 

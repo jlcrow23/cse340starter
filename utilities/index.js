@@ -1,8 +1,8 @@
 // const { accountLogin } = require("../controllers/accountController")
 const invModel = require("../models/inventory-model")
 const Util = {}
-// const jwt = require("jsonwebtoken")
-// require("dotenv").config()
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 /* *************************
 * Constructs the nav HTML unordered list
@@ -71,18 +71,36 @@ Util.buildInventoryDetails = async function(data){
     }
     return invDesc
 }
-
+/* ************************************
+* Classification List for choosing class
+* *********************************** */
 Util.buildClassificationList = async function (req,res,next) {
     let data = await invModel.getClassifications()
-    let list = '<select id="optionsList" name="classification_name" required>'
-    
+    let list = '<select id="classificationList" name="classification_name" required>'
+    list += '<option></option>'
     data.rows.forEach((row) => {
-        list += "<option>"
-        list += '<option value="' + row.classification_name + '">' + row.classification_name +  '</option>'
+        list += '<option value="' + row.classification_id + '">' + row.classification_name +  '</option>'
     })
-    list += "</select>"
+    list += '</select>'
     return list
 }
+
+/* ********************************
+* Check Login
+* ******************************* */
+Util.checkLogin = (req, res, next) => {
+    if (res.locals.loggedin) {
+        next()
+    } else {
+        req.flash("notice", "Please log in.")
+        return res.redirect("./account/login")
+    }
+}
+
+/* *********************************
+* Check Account Type for Inventory
+* ******************************** */
+
 /* *******************************
 * Middleware For Handling Errors
 * Wrap other function in this for
@@ -102,7 +120,7 @@ Util.checkJWTToken = (req, res, next) => {
                 if (err) {
                     req.flash("Please log in")
                     res.clearCookie("jwt")
-                    return res.redirect("/account/login")
+                    return res.redirect("./account/login")
                 }
                 res.locals.accountData = accountData
                 res.locals.loggedin = 1

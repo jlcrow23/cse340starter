@@ -10,7 +10,7 @@ router.get("/details/:inventoryId", invController.buildByInventoryId);
 router.get("/management", invController.buildManagementPage)
 router.get("/add-classification", invController.buildNewClass)
 router.get("/addInventory", invController.buildInventoryPage)
-
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 //Process New Classification
 router.post(
     "/newClassAdd",  
