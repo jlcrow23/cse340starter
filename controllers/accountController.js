@@ -71,7 +71,7 @@ async function registerAccount (req, res, next) {
     if (regResult) {
         req.flash(
             "notice",
-            `Congratulations, you\'re registered ${account_firstname}. Please log in.`
+            `Congratulations, you\'re registered, ${account_firstname}. Please log in.`
         )
         res.status(201).render("./account/login", {
             title: "Login",
@@ -130,5 +130,26 @@ async function accountLogin(req, res) {
     }
    }
    
+/* ************************************
+* Build Update Account Page
+* *********************************** */
+async function buildUpdateView (req, res, next) {
+    const { 
+        account_firstname, 
+        account_lastname, 
+        account_email, 
+    } = req.body
+    const acctInfo = acctModel.getAccountByEmail(account_email)
+    let nav = await utilities.getNav()
+    const acctName = `${acctInfo.account_firstname} ${acctInfo.account_lastname}`
+    res.render("./account/update-view", {
+        title: "Update info for " + acctName,
+        nav,
+        errors: null,
+        account_firstname: acctInfo.account_firstname,
+        account_lastname: acctInfo.account_lastname,
+        account_email: acctInfo.account_email
+    })
+}
 
-module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildAcctManagement }
+module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildAcctManagement, buildUpdateView }

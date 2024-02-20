@@ -101,6 +101,7 @@ Util.checkLogin = (req, res, next) => {
 * Check Account Type for Inventory
 * ******************************** */
 
+
 /* *******************************
 * Middleware For Handling Errors
 * Wrap other function in this for

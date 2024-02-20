@@ -215,7 +215,7 @@ invCont.getInventoryEdit = async function (req, res, next) {
 }
 
 /* *******************************
-* Inventory Changes View
+* Inventory Update in database
 * ****************************** */
 invCont.updateInventory = async function (req, res, next) {
   let nav = await utilities.getNav()

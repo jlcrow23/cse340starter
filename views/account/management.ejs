@@ -8,4 +8,14 @@
     <!--Message Block-->
 <%- messages() %> <!-- the (#) disables the code while the (-) or unescaped indicator will display it-->
 
-<h2></h2>
+<h2>You are logged in...</h2>
+<p>What would you like to do?</p>
+
+<fieldset>
+    <p>Click the button to update your account information</p>
+    <a href="/account/update-view" id="updateAcctBtn">Update Info</a>
+    <p>Click the button to go to inventory management page</p>
+    <a href="/inventory/management" id="invManagBtn" hidden>Inventory Management</a>
+</fieldset>
+
+<script src="../../js/account.js"></script>

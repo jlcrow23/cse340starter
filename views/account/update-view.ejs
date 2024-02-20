@@ -13,13 +13,13 @@
         <div class="updateForm">
             <form id="updateInfo" action="/account/updateAccountInfo" method="post" >
                 <label for="account_firstname"><b>First Name: </b></label>
-                <input type="text" name="account_firstname" value="<%= locals.account_firstname %>">
+                <input type="text" name="account_firstname" <% if(locals.account_firstname) { %>value="<%= locals.account_firstname %>"<% } %>>
 
                 <label for="acount_lastname"><b>Last Name: </b></label>
-                <input type="text" name="account_lastname" value="<%= locals.account_lastname %>">
+                <input type="text" name="account_lastname" <% if(locals.account_lastname) { %>value="<%= locals.account_lastname %>"<% } %>>
 
                 <label for="account_email"><b>Email: </b></label>
-                <input type="email" name="account_email" value="<%= locals.account_email %>">
+                <input type="email" name="account_email" <% if(locals.account_email) { %>value="<%= locals.account_email %>"<% } %>>
                 
                 <button type="submit">UPDATE</button>
                 
