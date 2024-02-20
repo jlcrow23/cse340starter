@@ -19,6 +19,8 @@ router.get("/addInventory", invController.buildInventoryPage)
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 // vehicle edit route
 router.get("/edit/:inventory_id", utilities.handleErrors(invController.getInventoryEdit))
+// vehicle delete route
+router.get("/delete/:inventory_id", utilities.handleErrors(invController.deleteVehicleData))
 //Process New Classification
 router.post(
     "/newClassAdd",  
@@ -39,4 +41,8 @@ router.post(
     invValidate.checkUpdateInventoryData,
     utilities.handleErrors(invController.updateInventory)
 );
+
+//Process vehicle delete
+router.post("/deleteComplete", utilities.handleErrors(invController.deleteInventory))
+
 module.exports = router;
