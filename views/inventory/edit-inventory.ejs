@@ -20,7 +20,7 @@
     <input type="text" placeholder="Model" name="inv_model" required <% if(locals.inv_model) { %> value="<%= locals.inv_model %>"<% } %> pattern="[A-Za-z0-9].{1,}" title="Letters and numbers only">
 
     <label for="inv_year">Year: <br></label>
-    <input type="number" placeholder="Year" name="inv_year" min="1901" max="2099" step="1" required <% if(locals.inv_year) { %>value="<%= locals.inv_year %>"<% } %> pattern="[0-9].{4,4}" title="4 digit year only">
+    <input type="number" name="inv_year" min="1901" max="2099" step="1" required <% if(locals.inv_year) { %>value="<%= locals.inv_year %>"<% } %> pattern="[0-9].{4,4}" title="4 digit year only">
 
     <label for="inv_description">Description: <br></label>
     <input type="text" placeholder="Description" name="inv_description" required <% if(locals.inv_description) { %>value="<%= locals.inv_description %>"<% } %> pattern="(*).{1,}">

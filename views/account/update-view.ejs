@@ -1,0 +1,40 @@
+<!--Content Heading Block-->
+<% if (title) { %>
+    <h1 id="acct-title"><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+    
+    <!--Message Block-->
+    <%- messages() %> <!-- the (#) disables the code while the (-) or unescaped indicator will display it-->
+
+    <!---->
+    <fieldset>
+        <div class="updateForm">
+            <form id="updateInfo" action="/account/updateAccountInfo" method="post" >
+                <label for="account_firstname"><b>First Name: </b></label>
+                <input type="text" name="account_firstname" value="<%= locals.account_firstname %>">
+
+                <label for="acount_lastname"><b>Last Name: </b></label>
+                <input type="text" name="account_lastname" value="<%= locals.account_lastname %>">
+
+                <label for="account_email"><b>Email: </b></label>
+                <input type="email" name="account_email" value="<%= locals.account_email %>">
+                
+                <button type="submit">UPDATE</button>
+                
+            </form>
+        </div>
+
+        <div class="updateForm">
+            <form id="updatePassword" action="/account/updatePassword" method="post" >
+                <label for="account_password"><b>Old Password: </b></label>
+                <input type="password" name="account_password" required>
+
+                <label for="account_password"><b>New Password: </b></label>
+                <input type="password" name="account_password" required>
+
+                <button type="submit">CHANGE PASSWORD</button>
+            </form>
+        </div>
+    </fieldset>

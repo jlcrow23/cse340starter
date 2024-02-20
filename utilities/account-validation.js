@@ -88,7 +88,7 @@ validate.loginRules = () => {
         .custom(async (account_email) => {
             const emailExists = await accountModel.checkExistingEmail(account_email)
             if (emailExists){
-                next()
+                return
             } else {
                 throw new Error("Please log in with a valid email or register.")
             }

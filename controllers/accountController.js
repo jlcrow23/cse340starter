@@ -93,7 +93,7 @@ async function registerAccount (req, res, next) {
 * *********************************** */
 async function buildAcctManagement (req, res, next) {
     let nav = await utilities.getNav()
-    res.render("./account/", {
+    res.render("./account/management", {
         title: "Account Management",
         nav,
         errors: null,
@@ -119,11 +119,11 @@ async function accountLogin(req, res) {
     }
      try {
     //  const passTest = await bcrypt.compare(account_password, accountData.account_password)
-        if (await bcrypt.compare(account_password, accountData.accout_password)) {
+        if (await bcrypt.compare(account_password, accountData.account_password)) {
             delete accountData.account_password
             const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
         res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
-     return res.redirect("./account/")
+     return res.redirect("./management")
         } 
     } catch (error) {
      return new Error('Access Forbidden')
