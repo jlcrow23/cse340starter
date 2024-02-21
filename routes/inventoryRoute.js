@@ -18,9 +18,9 @@ router.get("/addInventory", invController.buildInventoryPage)
 // vehicle inventory modification route
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 // vehicle edit route
-router.get("/edit/:inventory_id", utilities.handleErrors(invController.getInventoryEdit))
+router.get("/edit/:inventoryId", utilities.handleErrors(invController.getInventoryEdit))
 // vehicle delete route
-router.get("/delete/:inventory_id", utilities.handleErrors(invController.deleteVehicleData))
+router.get("/delete/:inventoryId", utilities.handleErrors(invController.deleteVehicleData))
 //Process New Classification
 router.post(
     "/newClassAdd",  
